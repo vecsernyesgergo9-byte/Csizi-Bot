@@ -182,7 +182,12 @@ async def on_member_update(before, after):
         )
 
         await log_channel.send(embed=embed)
-
+@bot.tree.command(name="ping", description="Ellenőrzi, hogy működik-e Csizi-Bot.")
+async def ping(interaction: discord.Interaction):
+    await interaction.response.send_message(
+        "🏓 **Csizi-Bot jelentkezik!**\n"
+        "A szerver működik. Én dolgozom. Fizetést továbbra sem láttam. 🥲"
+    )
 TOKEN = os.getenv("CSIZI_BOT_TOKEN")
 
 if not TOKEN:
