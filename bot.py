@@ -13,7 +13,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 @bot.event
 async def on_ready():
     print(f"Csizi-Bot elindult: {bot.user}")
-
+    await bot.tree.sync()
     await bot.change_presence(
         activity=discord.Game(name="Csizi szerverét figyelem")
 )
