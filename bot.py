@@ -185,9 +185,9 @@ async def on_member_update(before, after):
         )
 
         await log_channel.send(embed=embed)
-@discord.app_commands.guilds(discord.Object(id=1449737996436766802))
     
 @bot.tree.command(name="ping", description="Ellenőrzi, hogy működik-e Csizi-Bot.")
+@discord.app_commands.guilds(discord.Object(id=1449737996436766802))
 async def ping(interaction: discord.Interaction):
     await interaction.response.send_message(
         "🏓 **Csizi-Bot jelentkezik!**\n"
