@@ -14,7 +14,8 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 async def on_ready():
     print(f"Csizi-Bot elindult: {bot.user}")
     
-
+    guild = discord.Object(id=1449737996436766802)
+    await bot.tree.sync(guild=guild)
     await bot.change_presence(
         activity=discord.Game(name="Csizi szerverét figyelem")
 )
@@ -183,6 +184,8 @@ async def on_member_update(before, after):
         )
 
         await log_channel.send(embed=embed)
+@bot.tree.guilds(discord.Object(id=1449737996436766802))
+    
 @bot.tree.command(name="ping", description="Ellenőrzi, hogy működik-e Csizi-Bot.")
 async def ping(interaction: discord.Interaction):
     await interaction.response.send_message(
