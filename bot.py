@@ -343,4 +343,46 @@ async def otlet(interaction: discord.Interaction, otlet: str):
         "✅ Az ötletedet elküldtem!",
         ephemeral=True
     )
+@bot.tree.command(name="inaktiv", description="Inaktivitás bejelentése.")
+@discord.app_commands.guilds(discord.Object(id=1449737996436766802))
+async def inaktiv(
+    interaction: discord.Interaction,
+    meddig: str,
+    indok: str
+):
+        channel = interaction.guild.get_channel(1491953050779389962)
+
+    if not channel:
+        await interaction.response.send_message(
+            "❌ Nem találom az inaktivitás csatornát.",
+            ephemeral=True
+        )
+        return
+    embed = discord.Embed(
+        title="💤 Inaktivitás bejelentés"
+    )
+
+    embed.add_field(
+        name="👤 Tag",
+        value=interaction.user.mention,
+        inline=False
+    )
+
+    embed.add_field(
+        name="📅 Meddig",
+        value=meddig,
+        inline=False
+    )
+
+    embed.add_field(
+        name="📝 Indok",
+        value=indok,
+        inline=False
+    )
+    await channel.send(embed=embed)
+
+    await interaction.response.send_message(
+        "✅ Az inaktivitásodat elküldtem!",
+        ephemeral=True
+    )
 bot.run(TOKEN)
