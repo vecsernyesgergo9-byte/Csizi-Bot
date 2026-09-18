@@ -374,7 +374,7 @@ indok: str
     name="📅 Mettől – meddig",
     value=f"{mettol} – {meddig}",
     inline=False
-)
+
     )
 
     embed.add_field(
