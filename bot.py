@@ -347,8 +347,9 @@ async def otlet(interaction: discord.Interaction, otlet: str):
 @discord.app_commands.guilds(discord.Object(id=1449737996436766802))
 async def inaktiv(
     interaction: discord.Interaction,
-    meddig: str,
-    indok: str
+mettol: str,
+meddig: str,
+indok: str
 ):
     channel = interaction.guild.get_channel(1491953050779389962)
 
@@ -370,9 +371,10 @@ async def inaktiv(
     )
 
     embed.add_field(
-        name="📅 Meddig",
-        value=meddig,
-        inline=False
+    name="📅 Mettől – meddig",
+    value=f"{mettol} – {meddig}",
+    inline=False
+)
     )
 
     embed.add_field(
