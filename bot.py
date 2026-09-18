@@ -350,7 +350,7 @@ async def inaktiv(
     meddig: str,
     indok: str
 ):
-        channel = interaction.guild.get_channel(1491953050779389962)
+    channel = interaction.guild.get_channel(1491953050779389962)
 
     if not channel:
         await interaction.response.send_message(
@@ -358,6 +358,7 @@ async def inaktiv(
             ephemeral=True
         )
         return
+
     embed = discord.Embed(
         title="💤 Inaktivitás bejelentés"
     )
@@ -379,6 +380,7 @@ async def inaktiv(
         value=indok,
         inline=False
     )
+
     await channel.send(embed=embed)
 
     await interaction.response.send_message(
