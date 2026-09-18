@@ -242,7 +242,7 @@ class OtletGombok(discord.ui.View):
     def __init__(self):
         super().__init__(timeout=None)
 
-        @discord.ui.button(label="Elfogadás", style=discord.ButtonStyle.success, emoji="✅")
+       @discord.ui.button(label="Elfogadás", style=discord.ButtonStyle.success, emoji="✅")
     async def elfogadas(self, interaction: discord.Interaction, button: discord.ui.Button):
         staff_role = interaction.guild.get_role(1449738506741088306)
 
@@ -253,9 +253,9 @@ class OtletGombok(discord.ui.View):
             )
             return
 
-        embed = interaction.message.embeds[0]
+         embed = interaction.message.embeds[0]
 
-        embed.add_field(
+         embed.add_field(
             name="Állapot",
             value=f"✅ Elfogadva – {interaction.user.mention}",
             inline=False
@@ -264,8 +264,8 @@ class OtletGombok(discord.ui.View):
         for item in self.children:
             item.disabled = True
 
-        await interaction.response.edit_message(embed=embed, view=self)
-    @discord.ui.button(label="Elutasítás", style=discord.ButtonStyle.danger, emoji="❌")
+         await interaction.response.edit_message(embed=embed, view=self)
+     @discord.ui.button(label="Elutasítás", style=discord.ButtonStyle.danger, emoji="❌")
     async def elutasitas(self, interaction: discord.Interaction, button: discord.ui.Button):
         
             staff_role = interaction.guild.get_role(1449738506741088306)
