@@ -193,6 +193,44 @@ async def ping(interaction: discord.Interaction):
         "🏓 **Csizi-Bot jelentkezik!**\n"
         "A szerver működik. Én dolgozom. Fizetést továbbra sem láttam. 🥲"
     )
+@bot.tree.command(name="serverinfo", description="Információkat mutat a szerverről.")
+@discord.app_commands.guilds(discord.Object(id=1449737996436766802))
+async def serverinfo(interaction: discord.Interaction):
+    guild = interaction.guild
+
+    embed = discord.Embed(
+        title=f"📊 {guild.name} – Szerverinfó",
+        description="Minden fontos infó egy helyen."
+    )
+
+    embed.add_field(
+        name="👥 Tagok",
+        value=str(guild.member_count),
+        inline=True
+    )
+
+    embed.add_field(
+        name="💬 Csatornák",
+        value=str(len(guild.channels)),
+        inline=True
+    )
+
+    embed.add_field(
+        name="🎭 Rangok",
+        value=str(len(guild.roles) - 1),
+        inline=True
+    )
+
+    embed.add_field(
+        name="👑 Tulajdonos",
+        value=guild.owner.mention if guild.owner else "Ismeretlen",
+        inline=False
+    )
+
+    if guild.icon:
+        embed.set_thumbnail(url=guild.icon.url)
+
+    await interaction.response.send_message(embed=embed)
 TOKEN = os.getenv("CSIZI_BOT_TOKEN")
 
 if not TOKEN:
