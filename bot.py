@@ -237,5 +237,36 @@ if not TOKEN:
     raise RuntimeError(
         "Nincs beállítva a CSIZI_BOT_TOKEN."
     )
+@bot.tree.command(name="otlet", description="Küldj be egy ötletet a szerverhez.")
+@discord.app_commands.guilds(discord.Object(id=1449737996436766802))
+async def otlet(interaction: discord.Interaction, otlet: str):
+    channel = interaction.guild.get_channel(1475072110182531163)
 
+    if not channel:
+        await interaction.response.send_message(
+            "❌ Nem találom az ötletek csatornát.",
+            ephemeral=True
+        )
+        return
+
+    embed = discord.Embed(
+        title="💡 Új ötlet",
+        description=otlet
+    )
+
+    embed.add_field(
+        name="Beküldte",
+        value=interaction.user.mention,
+        inline=False
+    )
+
+    message = await channel.send(embed=embed)
+
+    await message.add_reaction("👍")
+    await message.add_reaction("👎")
+
+    await interaction.response.send_message(
+        "✅ Az ötletedet elküldtem!",
+        ephemeral=True
+    )
 bot.run(TOKEN)
