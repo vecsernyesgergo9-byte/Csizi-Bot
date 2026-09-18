@@ -15,7 +15,8 @@ async def on_ready():
     print(f"Csizi-Bot elindult: {bot.user}")
     
     guild = discord.Object(id=1449737996436766802)
-    await bot.tree.sync(guild=guild)
+    synced = await bot.tree.sync(guild=guild)
+print(f"Szinkronizált parancsok: {len(synced)}")
     await bot.change_presence(
         activity=discord.Game(name="Csizi szerverét figyelem")
 )
