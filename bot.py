@@ -16,7 +16,7 @@ async def on_ready():
     
     guild = discord.Object(id=1449737996436766802)
     synced = await bot.tree.sync(guild=guild)
-print(f"Szinkronizált parancsok: {len(synced)}")
+    print(f"Szinkronizált parancsok: {len(synced)}")
     await bot.change_presence(
         activity=discord.Game(name="Csizi szerverét figyelem")
 )
