@@ -389,4 +389,9 @@ indok: str
         "✅ Az inaktivitásodat elküldtem!",
         ephemeral=True
     )
-bot.run(TOKEN)
+BOT_ENABLED = os.getenv("BOT_ENABLED", "true").lower() == "true"
+
+if BOT_ENABLED:
+    bot.run(TOKEN)
+else:
+    print("Csizi-Bot jelenleg szüneteltetve van.")
