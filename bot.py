@@ -91,6 +91,27 @@ TILTOTT_SZAVAK = [
     "apaddal",
     "apázás",
     "apazas"
+    "anyáz",
+    "anyaz",
+    "anyázni",
+    "anyazni",
+    "anyázol",
+    "anyazol",
+    "anyázz",
+    "anyazz",
+    "anyázas",
+    "anyazas",
+    "anyázas",
+    "apáz",
+    "apaz",
+    "apázni",
+    "apazni",
+    "apázol",
+    "apazol",
+    "apázz",
+    "apazz",
+    "apázás",
+    "apazas",
 ]
 
 @bot.event
