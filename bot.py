@@ -9,6 +9,42 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
+TILTOTT_SZAVAK = [
+    
+    "kurva",
+    "geci",
+    "faszfej",
+    "faszkalap",
+    "bazdmeg",
+    "baszdmeg",
+    "bazmeg",
+    "baszod",
+    "bazd",
+    "baszd",
+    "seggfej",
+    "buzi",
+    "buzis",
+    "buzul",
+    "buzeráns",
+    "buzerans",
+    "retardált",
+    "retardalt",
+    "nyomorék",
+    "nyomorek",
+    "idióta",
+    "idiota",
+    "anyád",
+    "anyad",
+    "anyádat",
+    "anyadat",
+    "anyádba",
+    "anyadba",
+    "apád",
+    "apad",
+    "apádat",
+    "apadat"
+
+]
 
 @bot.event
 async def on_ready():
@@ -91,6 +127,31 @@ async def on_message_delete(message):
         )
 
         await log_channel.send(embed=embed)
+
+@bot.event
+async def on_message(message):
+    if message.author.bot:
+        return
+
+    szoveg = message.content.lower()
+
+    if any(szo in szoveg for szo in TILTOTT_SZAVAK):
+        try:
+            await message.delete()
+
+            try:
+                await message.author.send(
+                    "⚠️ **Figyelmeztetés – Csizi-Bot**\n"
+                    "Ilyet nem szabad csinálni."
+                )
+            except discord.Forbidden:
+                pass
+
+        except discord.Forbidden:
+            pass
+
+    await bot.process_commands(message)
+
 
 @bot.event
 async def on_message_edit(before, after):
