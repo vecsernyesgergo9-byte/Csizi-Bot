@@ -112,6 +112,28 @@ TILTOTT_SZAVAK = [
     "apazz",
     "apázás",
     "apazas",
+    "nigger",
+    "niggers",
+    "nigga",
+    "niggas",
+    "niggáz",
+    "niggaz",
+    "niggázás",
+    "niggazas",
+    "cigányoz",
+    "ciganyoz",
+    "cigányozás",
+    "ciganyozas",
+    "cigányozik",
+    "ciganyozik",
+    "cigányozni",
+    "ciganyozni",
+    "zsidózik",
+    "zsidozik",
+    "zsidózás",
+    "zsidozas",
+    "zsidózni",
+    "zsidozni"
 ]
 
 @bot.event
