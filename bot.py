@@ -195,7 +195,7 @@ async def on_member_remove(member):
 @bot.event
 async def on_message_delete(message):
         if message.author.bot or not message.guild:
-        return
+           return
 
     log_channel = message.guild.get_channel(1550209636362227833)
 
