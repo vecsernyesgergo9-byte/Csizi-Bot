@@ -1,4 +1,5 @@
 import os
+import asyncio
 import discord
 from discord.ext import commands
 from datetime import datetime, timezone
@@ -223,6 +224,7 @@ async def on_message_delete(message):
 
     torolte = None
     torles_ideje = datetime.now(timezone.utc)
+    await asyncio.sleep(2)
 
     try:
         async for entry in message.guild.audit_logs(
