@@ -194,8 +194,12 @@ async def on_member_remove(member):
         await channel.send(embed=embed)
 @bot.event
 async def on_message_delete(message):
-        if message.author.bot or not message.guild:
-           return
+        @bot.event
+async def on_message(message):
+@bot.event
+async def on_message_delete(message):
+    if message.author.bot or not message.guild:
+        return
 
     log_channel = message.guild.get_channel(1550209636362227833)
 
@@ -232,13 +236,10 @@ async def on_message_delete(message):
                 and entry.target.id == message.author.id
                 and getattr(entry.extra, "channel", None)
                 and entry.extra.channel.id == message.channel.id
-                and 0 <= (
-                    torles_ideje - entry.created_at
-                ).total_seconds() <= 5
+                and 0 <= (torles_ideje - entry.created_at).total_seconds() <= 5
             ):
                 torolte = entry.user
                 break
-
     except discord.Forbidden:
         pass
 
@@ -249,33 +250,6 @@ async def on_message_delete(message):
     )
 
     await log_channel.send(embed=embed)
-
-      
-@bot.event
-async def on_message(message):
-    if message.author.bot:
-        return
-
-    szoveg = message.content.lower()
-
-    if any(szo in szoveg for szo in TILTOTT_SZAVAK):
-        try:
-            await message.delete()
-
-            try:
-                await message.author.send(
-                    "⚠️ **Figyelmeztetés – Csizi-Bot**\n"
-                    "Ilyet nem szabad csinálni."
-                )
-            except discord.Forbidden:
-                pass
-
-        except discord.Forbidden:
-            pass
-
-    await bot.process_commands(message)
-
-
 @bot.event
 async def on_message_edit(before, after):
     if before.author.bot:
