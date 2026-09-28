@@ -136,6 +136,8 @@ TILTOTT_SZAVAK = [
     "zsidozas",
     "zsidózni",
     "zsidozni"
+    "anyu",
+    "apu",
 ]
 
 @bot.event
