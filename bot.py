@@ -249,6 +249,28 @@ async def on_message_delete(message):
 
     await log_channel.send(embed=embed)
 @bot.event
+async def on_message(message):
+    if message.author.bot:
+        return
+
+    szoveg = message.content.lower()
+
+    if any(szo in szoveg for szo in TILTOTT_SZAVAK):
+        try:
+            await message.delete()
+
+            try:
+                await message.author.send(
+                    "⚠️ **Figyelmeztetés – Csizi-Bot**\n"
+                    "Ilyet nem szabad csinálni."
+                )
+            except discord.Forbidden:
+                pass
+
+        except discord.Forbidden:
+            pass
+
+    await bot.process_commands(message)@bot.event
 async def on_message_edit(before, after):
     if before.author.bot:
         return
