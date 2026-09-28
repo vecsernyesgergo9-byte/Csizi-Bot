@@ -1,6 +1,7 @@
 import os
 import discord
 from discord.ext import commands
+from datetime import datetime, timezone
 
 # Discord jogosultságok / események
 intents = discord.Intents.default()
@@ -193,31 +194,63 @@ async def on_member_remove(member):
         await channel.send(embed=embed)
 @bot.event
 async def on_message_delete(message):
-    if message.author.bot:
+        if message.author.bot or not message.guild:
         return
 
     log_channel = message.guild.get_channel(1550209636362227833)
 
-    if log_channel:
-        embed = discord.Embed(
-            title="🗑️ Üzenet törölve",
-            description=message.content or "Az üzenet nem tartalmazott szöveget."
-        )
+    if not log_channel:
+        return
 
-        embed.add_field(
-            name="Felhasználó",
-            value=message.author.mention,
-            inline=False
-        )
+    embed = discord.Embed(
+        title="🗑️ Üzenet törölve",
+        description=message.content or "Az üzenet nem tartalmazott szöveget."
+    )
 
-        embed.add_field(
-            name="Csatorna",
-            value=message.channel.mention,
-            inline=False
-        )
+    embed.add_field(
+        name="Felhasználó",
+        value=message.author.mention,
+        inline=False
+    )
 
-        await log_channel.send(embed=embed)
+    embed.add_field(
+        name="Csatorna",
+        value=message.channel.mention,
+        inline=False
+    )
 
+    torolte = None
+    torles_ideje = datetime.now(timezone.utc)
+
+    try:
+        async for entry in message.guild.audit_logs(
+            limit=5,
+            action=discord.AuditLogAction.message_delete
+        ):
+            if (
+                entry.target
+                and entry.target.id == message.author.id
+                and getattr(entry.extra, "channel", None)
+                and entry.extra.channel.id == message.channel.id
+                and 0 <= (
+                    torles_ideje - entry.created_at
+                ).total_seconds() <= 5
+            ):
+                torolte = entry.user
+                break
+
+    except discord.Forbidden:
+        pass
+
+    embed.add_field(
+        name="🗑️ Törölte",
+        value=torolte.mention if torolte else "Nem állapítható meg.",
+        inline=False
+    )
+
+    await log_channel.send(embed=embed)
+
+      
 @bot.event
 async def on_message(message):
     if message.author.bot:
