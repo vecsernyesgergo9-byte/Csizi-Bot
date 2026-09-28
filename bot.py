@@ -192,10 +192,8 @@ async def on_member_remove(member):
         embed.set_thumbnail(url=member.display_avatar.url)
 
         await channel.send(embed=embed)
-@bot.event
-async def on_message_delete(message):
-        @bot.event
-async def on_message(message):
+
+
 @bot.event
 async def on_message_delete(message):
     if message.author.bot or not message.guild:
